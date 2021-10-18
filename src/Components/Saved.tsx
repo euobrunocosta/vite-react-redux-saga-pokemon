@@ -16,7 +16,12 @@ const Saved = () => {
   return (
     <Container>
       {savedPokemons.map((pokemon, index) => (
-        <PokemonView key={`${pokemon.name}${index}`} pokemon={pokemon} />
+        <PokemonView
+          key={`${pokemon.name}${index}`}
+          index={index}
+          pokemon={pokemon}
+          canBeRemoved
+        />
       ))}
     </Container>
   )

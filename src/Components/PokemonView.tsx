@@ -1,9 +1,10 @@
 import React from 'react'
 import { Card } from 'antd'
-import { TPokemon } from 'redux/ducks/pokemon'
+import { remove, TPokemon } from '../redux/ducks/pokemon'
 import styled from 'styled-components'
 import { FaRegTrashAlt } from  'react-icons/fa'
 import { getColorByVariant, Variant } from './Buttons'
+import { useDispatch } from 'react-redux'
 
 const Container = styled.div`
   width: 250px;
@@ -24,17 +25,24 @@ const IconButton = styled.button`
 
 type TProps = {
   pokemon: TPokemon
+  index?: number
   canBeRemoved?: boolean
 }
 
 const PokemonView = (props: TProps) => {
-  const { pokemon, canBeRemoved = false } = props
+  const { index, pokemon, canBeRemoved = false } = props
+
+  const dispatch = useDispatch()
+
+  const onClickRemove = () => {
+    if (index !== undefined) dispatch(remove(index))
+  }
 
   return (
     <Container>
       <Card
         title={pokemon.name.toUpperCase()}
-        extra={canBeRemoved && <IconButton><FaRegTrashAlt /></IconButton>}
+        extra={canBeRemoved && <IconButton onClick={onClickRemove}><FaRegTrashAlt /></IconButton>}
       >
         <p>
           <img src={pokemon.sprites?.front} alt={`${pokemon.name} Front`} />

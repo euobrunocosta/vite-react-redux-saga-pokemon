@@ -1,16 +1,13 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import counterReducer, { TState as TCounterState } from './ducks/counter'
 import pokemonReducer, { TState as TPokemonState } from './ducks/pokemon'
 import { watcherSaga } from './sagas/rootSaga'
 
 export type TRootReducer = {
-  counter: TCounterState
   pokemon: TPokemonState
 }
 
 const reducer = combineReducers({
-  counter: counterReducer,
   pokemon: pokemonReducer
 })
 

@@ -1,7 +1,8 @@
 export enum Actions {
   PICK_RANDOM = 'pickRandom',
   SET_POKEMON = 'setPokemon',
-  SAVE = 'save'
+  SAVE = 'save',
+  REMOVE = 'remove'
 }
 
 export const pickRandom = () => ({
@@ -16,6 +17,12 @@ export const setRandom = (pokemon: TPokemon) => ({
 export const save = (pokemon: TPokemon) => ({
   type: Actions.SAVE,
   payload: { pokemon }
+})
+
+export const remove = (index: number) => ({
+  type: Actions.REMOVE,
+  payload: { index }
+
 })
 
 export type TPokemon = {
@@ -60,6 +67,15 @@ const reducer = (state: TState = initialState, action: any): TState => {
       return {
         ...state,
         random: action.payload.pokemon
+      }
+
+    case Actions.REMOVE:
+      const newSavedList = state.saved.filter(
+        (_, index) => index !== action.payload.index
+      ) 
+      return {
+        ...state,
+        saved: newSavedList
       }
 
     default: 
