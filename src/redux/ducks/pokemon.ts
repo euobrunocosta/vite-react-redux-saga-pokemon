@@ -60,7 +60,7 @@ const reducer = (state: TState = initialState, action: any): TState => {
     case Actions.SAVE:
       return {
         ...state,
-        saved: [...state.saved, action.payload.pokemon as TPokemon]
+        saved: [action.payload.pokemon as TPokemon, ...state.saved]
       }
       
     case Actions.SET_POKEMON:
